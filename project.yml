@@ -3,6 +3,7 @@ options:
   bundleIdPrefix: net.chigita
   deploymentTarget:
     iOS: "13.0"
+  carthageExecutablePath: mint run Carthage/Carthage
 targets:
   FollowingDependencyApp:
     info:
@@ -16,4 +17,5 @@ targets:
       iOS: "13.0"
     sources: 
       - path: followingDependencyApp
-
+    dependencies:
+      - carthage: Swinject
