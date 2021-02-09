@@ -1,4 +1,11 @@
 # follow-dependency-rule-ios
+
+## ScreenShots
+
+TopScreen | Message Received Screen
+:---: | :---:
+<img src="https://user-images.githubusercontent.com/7840108/107313239-79dc6f80-6ad5-11eb-8fec-f2051946b172.png" width="300" /> | <img src="https://user-images.githubusercontent.com/7840108/107313255-7fd25080-6ad5-11eb-8b1a-0e5449c17ddd.png" width="300" />
+
 ## For Developers
 ### Initial setup
 
