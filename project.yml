@@ -1,21 +1,70 @@
-name: FollowingDependencyApp 
+name: FollowDependencyApp 
+packages:
+    RxSwift:
+      url: https://github.com/ReactiveX/RxSwift
+      minorVersion: 5.1.1
+    Swinject:
+      url: https://github.com/Swinject/Swinject
+      minorVersion: 2.7.1
+    GRPC:
+      url: https://github.com/grpc/grpc-swift
+      minorVersion: 1.0.0
+    Lottie:
+      url: https://github.com/airbnb/lottie-ios
+      minorVersion: 3.1.2
 options:
   bundleIdPrefix: net.chigita
   deploymentTarget:
     iOS: "13.0"
-  carthageExecutablePath: mint run Carthage/Carthage
+configs:
+  Mock DEBUG: debug
+  Mock Release: release 
+  Development DEBUG: debug
+  Development Release: release
+  Production Debug: debug
+  Production RELEASE: release
+settings:
+    configs:
+      Mock DEBUG:
+        SWIFT_ACTIVE_COMPILATION_CONDITIONS: MOCK DEBUG
+      Development DEBUG:
+        SWIFT_ACTIVE_COMPILATION_CONDITIONS: DEVELOPMENT DEBUG
 targets:
-  FollowingDependencyApp:
+  FollowDependencyApp:
     info:
-      path: followingDependencyApp/Info.plist
+      path: followDependencyApp/Info.plist
       properties:
-        UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
+        UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait, UIInterfaceOrientationPortraitUpsideDown, UIInterfaceOrientationLandscapeLeft, UIInterfaceOrientationLandscapeRight]
         UILaunchStoryboardName: LaunchScreen
+        LSApplicationQueriesSchemes:
+            - https
+        UIApplicationSceneManifest:
+          UIApplicationSupportsMultipleScenes: false
+          UISceneConfigurations: 
+            UIWindowSceneSessionRoleApplication: 
+              - UISceneConfigurationName: Default Configuration
+                UISceneDelegateClassName: $(PRODUCT_MODULE_NAME).SceneDelegate
+    scheme:
+        configVariants:
+          - Mock
+          - Development
+          - Production
+    postCompileScripts:
+      - script: mint run swiftlint autocorrect && mint run swiftlint
+        name: Swiftlint
+      - script: mint run swiftformat $SRCROOT --exclude followDependencyApp/data/gen
+        name: SwiftFormat
+
     type: application
     platform: iOS
     deploymentTarget:
       iOS: "13.0"
     sources: 
-      - path: followingDependencyApp
+      - path: followDependencyApp
     dependencies:
-      - carthage: Swinject
+      - package: RxSwift
+      - package: RxSwift
+        product: RxCocoa
+      - package: Swinject
+      - package: GRPC
+      - package: Lottie

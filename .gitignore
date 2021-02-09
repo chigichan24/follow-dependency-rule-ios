@@ -1,6 +1,4 @@
 *.xcodeproj
-*.xcworkspace
 Info.plist
 
-Carthage/
 

@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package parrot;
+
+service ParrotService {
+  rpc Hello(HelloRequest) returns (HelloResponse) {}
+}
+
+message HelloRequest {
+  string hello = 1;
+}
+
+message HelloResponse {
+  string hello = 1;
+}
